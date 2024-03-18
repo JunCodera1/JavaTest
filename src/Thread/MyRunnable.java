@@ -1,10 +1,10 @@
 package Thread;
 
+
 public class MyRunnable implements Runnable{
 
-	@Override
-	public void run() {
-		for(int i = 0; i <= 10; i++) {
+	public void run(int n) {
+		for(int i = 1; i <= n; i++) {
 			System.out.println("Thread #2: " + i);
 			try {
 				Thread.sleep(1000);
@@ -13,6 +13,12 @@ public class MyRunnable implements Runnable{
 			}
 		}
 		System.out.println("Thread #2 : finished!");
+	}
+
+	@Override
+	public void run() {
+		for(int i = 0)
+		
 	}
 
 }
