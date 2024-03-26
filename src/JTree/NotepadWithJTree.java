@@ -112,9 +112,6 @@ public class NotepadWithJTree extends JFrame implements ActionListener {
                     DefaultMutableTreeNode node = new DefaultMutableTreeNode(file.getName());
                     parentNode.add(node);
                     readFilesRecursive(file, node);
-                } else {
-                    DefaultMutableTreeNode node = new DefaultMutableTreeNode(file.getName());
-                    parentNode.add(node);
                 }
             }
         }

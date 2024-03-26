@@ -1,0 +1,5 @@
+Mã SV: SV001, Họ tên: Nguyễn Văn A, Giới tính: Nam, Điểm Java: 8.5, Điểm Python: 7.0
+Mã SV: SV002, Họ tên: Trần Thị B, Giới tính: Nữ, Điểm Java: 7.0, Điểm Python: 9.0
+Mã SV: SV003, Họ tên: Phạm Văn C, Giới tính: Nam, Điểm Java: 6.0, Điểm Python: 8.0
+Mã SV: SV004, Họ tên: Lê Thị D, Giới tính: Nữ, Điểm Java: 9.0, Điểm Python: 6.5
+Mã SV: SV005, Họ tên: Hoàng Văn E, Giới tính: Nam, Điểm Java: 8.0, Điểm Python: 8.5

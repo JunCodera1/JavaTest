@@ -20,34 +20,35 @@ import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class AppSampleNotepad extends JFrame implements ActionListener {
+public class AppSampleNotepad extends JFrame implements ActionListener{
+	
 	private JTextArea textArea;
 	
 	public AppSampleNotepad() {
-		setTitle("Fake Notepad");
-		setSize(800, 600);
+		setTitle("Notepad");
+		setSize(800,600);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		textArea = new JTextArea();
 		JScrollPane scrollPane = new JScrollPane(textArea);
 		
 		JMenuBar menuBar = new JMenuBar();
-		JMenu fileMenu = new JMenu("File");
+		JMenu menu = new JMenu("File");
 		JMenuItem openItem = new JMenuItem("Open");
 		JMenuItem saveItem = new JMenuItem("Save");
-		JMenuItem exitItem = new JMenuItem("Exit");
+		JMenuItem closeItem = new JMenuItem("Close");
 		
 		openItem.addActionListener(this);
 		saveItem.addActionListener(this);
-		exitItem.addActionListener(this);
+		closeItem.addActionListener(this);
 		
-		fileMenu.add(openItem);
-		fileMenu.add(saveItem);
-		fileMenu.add(exitItem);
-		menuBar.add(fileMenu);
+		menu.add(openItem);
+		menu.add(saveItem);
+		menu.add(closeItem);
+		menuBar.add(menu);
 		
 		setJMenuBar(menuBar);
-		add(scrollPane, BorderLayout.CENTER);
+		add(scrollPane,BorderLayout.CENTER);
 	}
 
 	@Override
@@ -55,17 +56,17 @@ public class AppSampleNotepad extends JFrame implements ActionListener {
 		String command = e.getActionCommand();
 		switch(command) {
 		case "Open":
-			openFile();
+			open();
+			break;
+		case "Close":
+			System.exit(0);
 			break;
 		case "Save":
-			saveFile();
+			save();
 			break;
-		case "Exit":
-			System.exit(0);
 		}
 	}
-	
-	private void openFile() {
+	private void open() {
 		JFileChooser fileChooser = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files", "txt");
 		fileChooser.setFileFilter(filter);
@@ -76,33 +77,37 @@ public class AppSampleNotepad extends JFrame implements ActionListener {
 			try(BufferedReader reader = new BufferedReader(new FileReader(file))){
 				textArea.setText("");
 				String line;
-				while((line = reader.readLine()) != null) {
+				while((line = reader.readLine())!= null) {
 					textArea.append(line + "\n");
 				}
 			}catch(IOException e) {
 				e.printStackTrace();
 			}
 		}
+		
 	}
-	private void saveFile() {
+	
+	private void save() {
 		JFileChooser fileChooser = new JFileChooser();
-		FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files","txt");
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Text Files", "txt");
 		fileChooser.setFileFilter(filter);
 		
 		int returnValue = fileChooser.showOpenDialog(this);
-		if (returnValue == JFileChooser.APPROVE_OPTION) {
-            File file = fileChooser.getSelectedFile();
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-                writer.write(textArea.getText());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+		if(returnValue == JFileChooser.APPROVE_OPTION) {
+			File file = fileChooser.getSelectedFile();
+			try(BufferedWriter writer = new BufferedWriter(new FileWriter(file))){
+				writer.write(textArea.getText());
+			}catch(IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
 	}
 	public static void main(String[] args) {
-		SwingUtilities.invokeLater(() -> {
+		SwingUtilities.invokeLater(()->{
 			AppSampleNotepad notepad = new AppSampleNotepad();
-            notepad.setVisible(true);
-        });
+			notepad.setVisible(true);
+		});
 	}
+	
 }
